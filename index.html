@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LASTPLATE | MISSION</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;600;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg: #030303;
+    --accent: #ffffff;
+    --dim: #888888;
+    --glow: rgba(255, 255, 255, 0.05);
+    --transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: white;
+    overflow-x: hidden;
+    letter-spacing: 0.15em;
+}
+
+/* --- Animated Gradient Background --- */
+
+body::before{
+    content: '';
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04), transparent 40%);
+    animation: moveBg 30s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes moveBg{
+    0% {transform: translate(0,0);}
+    100% {transform: translate(-10%, -10%);}
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{width: 4px;}
+::-webkit-scrollbar-thumb{background: #444; border-radius: 10px;}
+::-webkit-scrollbar-track{background: #000;}
+
+/* Header */
+
+nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+}
+
+.logo{
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 12px 40px;
+    border-radius: 50px;
+    transition: 0.4s ease;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+}
+
+.logo:hover{
+    background: white;
+    color: black;
+    border-color: white;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+/* Sections */
+
+section{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10%;
+    position: relative;
+}
+
+/* Text Reveal - Upgraded for a cinematic scale-in */
+
+.reveal-text{
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    filter: blur(12px);
+    transition: var(--transition);
+}
+
+.reveal-text.active{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+h1{
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 100;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    line-height: 1.1;
+}
+
+/* The "Lit" Text Effect */
+.text-glow {
+    background: linear-gradient(to right, #666, #fff, #666);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+.sub-text{
+    color: var(--dim);
+    font-size: 0.85rem;
+    max-width: 650px;
+    line-height: 2.2;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+}
+
+/* Sidebar */
+
+.sidebar{
+    position: fixed;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+}
+
+.nav-line{
+    height: 200px;
+    width: 2px;
+    background: rgba(255,255,255,0.05);
+    position: relative;
+    border-radius: 2px;
+}
+
+.nav-progress{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 0%;
+    background: white;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.nav-label{
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.55rem;
+    margin-top: 25px;
+    color: #666;
+    letter-spacing: 0.3em;
+}
+
+/* Timeline Dock */
+
+.timeline-dock{
+    position: absolute;
+    bottom: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(30px, 6vw, 80px);
+    width: 100%;
+}
+
+.dock-item{
+    font-size: 0.6rem;
+    color: #555;
+    position: relative;
+    cursor: pointer;
+    transition: 0.4s;
+    padding-bottom: 8px;
+}
+
+.dock-item::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background: white;
+    transition: 0.4s ease;
+}
+
+.dock-item.active, .dock-item:hover{
+    color: white;
+    text-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+.dock-item.active::after, .dock-item:hover::after{
+    width: 100%;
+    box-shadow: 0 0 10px white;
+}
+
+/* Footer */
+
+footer{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at bottom, #111 0%, #000 70%);
+    position: relative;
+}
+
+.sig{
+    font-style: italic;
+    font-family: 'Times New Roman', serif;
+    font-size: 2rem;
+    opacity: 0.4;
+    margin-top: 60px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* Floating Particles */
+
+canvas{
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+    <div class="logo">LASTPLATE</div>
+</nav>
+
+<div class="sidebar">
+    <div class="nav-line">
+        <div class="nav-progress" id="progress"></div>
+    </div>
+    <div class="nav-label">MISSION CHRONICLE</div>
+</div>
+
+<section id="s1">
+    <h1 class="reveal-text">The Art of Recovery</h1>
+    <p class="sub-text reveal-text" style="transition-delay:.2s;">
+        Inspired by precision. LastPlate is the scientific research into a world without surplus.
+    </p>
+</section>
+
+<section id="s2">
+    <h1 class="reveal-text">Wind Blows Round</h1>
+    <p class="sub-text reveal-text" style="transition-delay:.2s;">
+        Engineering a circular economy where every plate finds its purpose.
+    </p>
+</section>
+
+<section id="s3">
+    <h1 class="reveal-text">The Peak Journey</h1>
+    <p class="sub-text reveal-text" style="transition-delay:.2s;">
+        From immediate redistribution to a global ecosystem of efficiency.
+    </p>
+
+    <div class="timeline-dock">
+        <div class="dock-item reveal-text active" style="transition-delay:.4s;">LASTPLATE v1</div>
+        <div class="dock-item reveal-text" style="transition-delay:.5s;">AI PREDICTION</div>
+        <div class="dock-item reveal-text" style="transition-delay:.6s;">BIO-INTEGRATION</div>
+        <div class="dock-item reveal-text" style="transition-delay:.7s;">SUSTAINABLE PEAK</div>
+    </div>
+</section>
+
+<section id="s4">
+    <h1 class="reveal-text text-glow">MAKE EARTH<br>GREAT AGAIN.</h1>
+    <p class="sub-text reveal-text" style="transition-delay:.3s;">
+        Zero waste. Maximum impact. The revolution begins here.
+    </p>
+</section>
+
+<footer>
+    <p class="sub-text reveal-text">Crafted for a sustainable future.</p>
+    <div class="sig reveal-text" style="transition-delay:.3s;">The LastPlate Team</div>
+</footer>
+
+<script>
+
+/* Smooth Reveal on Scroll */
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.25
+};
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('active');
+            // Optional: stop observing once revealed so it stays visible
+            // observer.unobserve(entry.target); 
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.reveal-text').forEach(el => observer.observe(el));
+
+/* Scroll Progress Tracker */
+window.addEventListener('scroll', () => {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("progress").style.height = scrolled + "%";
+});
+
+/* Upgraded Floating Particles (60FPS requestAnimationFrame) */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+let particles = [];
+const particleCount = 80;
+
+for(let i = 0; i < particleCount; i++){
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5 + 0.5,
+        d: Math.random() * 0.8 + 0.2, // Drift speed
+        alpha: Math.random() * 0.5 + 0.1
+    });
+}
+
+function animateParticles(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+        ctx.fill();
+        
+        // Embers float UPWARDS for a more dynamic, energetic feel
+        p.y -= p.d; 
+        
+        // Reset at the bottom when they float off the top
+        if(p.y < 0){
+            p.y = canvas.height;
+            p.x = Math.random() * canvas.width;
+        }
+    });
+    
+    requestAnimationFrame(animateParticles);
+}
+
+// Start the loop
+animateParticles();
+
+/* Interactive Dock (Visual click effect) */
+const dockItems = document.querySelectorAll('.dock-item');
+dockItems.forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelector('.dock-item.active').classList.remove('active');
+        item.classList.add('active');
+    });
+});
+
+</script>
+
+</body>
+</html>
