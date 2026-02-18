@@ -8,8 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;600;900&display=swap" rel="stylesheet">
 
 <style>
-
-:root{
+:root {
     --bg: #030303;
     --accent: #ffffff;
     --dim: #888888;
@@ -17,13 +16,11 @@
     --transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-html{
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
-body{
+body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: white;
@@ -32,8 +29,7 @@ body{
 }
 
 /* --- Animated Gradient Background --- */
-
-body::before{
+body::before {
     content: '';
     position: fixed;
     width: 200%;
@@ -44,20 +40,18 @@ body::before{
     z-index: -1;
 }
 
-@keyframes moveBg{
-    0% {transform: translate(0,0);}
-    100% {transform: translate(-10%, -10%);}
+@keyframes moveBg {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(-10%, -10%); }
 }
 
 /* Scrollbar */
-
-::-webkit-scrollbar{width: 4px;}
-::-webkit-scrollbar-thumb{background: #444; border-radius: 10px;}
-::-webkit-scrollbar-track{background: #000;}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+::-webkit-scrollbar-track { background: #000; }
 
 /* Header */
-
-nav{
+nav {
     position: fixed;
     top: 0;
     width: 100%;
@@ -66,9 +60,10 @@ nav{
     justify-content: center;
     z-index: 100;
     mix-blend-mode: difference;
+    transition: padding 0.3s ease;
 }
 
-.logo{
+.logo {
     font-weight: 600;
     font-size: 0.85rem;
     border: 1px solid rgba(255,255,255,0.3);
@@ -79,7 +74,7 @@ nav{
     backdrop-filter: blur(5px);
 }
 
-.logo:hover{
+.logo:hover {
     background: white;
     color: black;
     border-color: white;
@@ -88,8 +83,7 @@ nav{
 }
 
 /* Sections */
-
-section{
+section {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -100,30 +94,28 @@ section{
     position: relative;
 }
 
-/* Text Reveal - Upgraded for a cinematic scale-in */
-
-.reveal-text{
+/* Text Reveal */
+.reveal-text {
     opacity: 0;
     transform: translateY(50px) scale(0.95);
     filter: blur(12px);
     transition: var(--transition);
 }
 
-.reveal-text.active{
+.reveal-text.active {
     opacity: 1;
     transform: translateY(0) scale(1);
     filter: blur(0);
 }
 
-h1{
-    font-size: clamp(2.5rem, 7vw, 5.5rem);
+h1 {
+    font-size: clamp(2rem, 6vw, 5.5rem);
     font-weight: 100;
     text-transform: uppercase;
     margin-bottom: 25px;
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
-/* The "Lit" Text Effect */
 .text-glow {
     background: linear-gradient(to right, #666, #fff, #666);
     background-size: 200% auto;
@@ -140,26 +132,28 @@ h1{
     to { background-position: 200% center; }
 }
 
-.sub-text{
+.sub-text {
     color: var(--dim);
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
     max-width: 650px;
     line-height: 2.2;
     text-transform: uppercase;
     letter-spacing: 0.25em;
 }
 
-/* Sidebar */
-
-.sidebar{
+/* Sidebar / Progress */
+.sidebar {
     position: fixed;
     left: 40px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.nav-line{
+.nav-line {
     height: 200px;
     width: 2px;
     background: rgba(255,255,255,0.05);
@@ -167,7 +161,7 @@ h1{
     border-radius: 2px;
 }
 
-.nav-progress{
+.nav-progress {
     position: absolute;
     top: 0;
     width: 100%;
@@ -176,7 +170,7 @@ h1{
     box-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
-.nav-label{
+.nav-label {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-size: 0.55rem;
@@ -186,18 +180,17 @@ h1{
 }
 
 /* Timeline Dock */
-
-.timeline-dock{
+.timeline-dock {
     position: absolute;
     bottom: 10vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: clamp(30px, 6vw, 80px);
+    gap: clamp(20px, 5vw, 80px);
     width: 100%;
 }
 
-.dock-item{
+.dock-item {
     font-size: 0.6rem;
     color: #555;
     position: relative;
@@ -206,7 +199,7 @@ h1{
     padding-bottom: 8px;
 }
 
-.dock-item::after{
+.dock-item::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -218,19 +211,18 @@ h1{
     transition: 0.4s ease;
 }
 
-.dock-item.active, .dock-item:hover{
+.dock-item.active, .dock-item:hover {
     color: white;
     text-shadow: 0 0 15px rgba(255,255,255,0.4);
 }
 
-.dock-item.active::after, .dock-item:hover::after{
+.dock-item.active::after, .dock-item:hover::after {
     width: 100%;
     box-shadow: 0 0 10px white;
 }
 
 /* Footer */
-
-footer{
+footer {
     height: 80vh;
     display: flex;
     flex-direction: column;
@@ -238,12 +230,14 @@ footer{
     align-items: center;
     background: radial-gradient(circle at bottom, #111 0%, #000 70%);
     position: relative;
+    padding: 0 5%;
+    text-align: center;
 }
 
-.sig{
+.sig {
     font-style: italic;
     font-family: 'Times New Roman', serif;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
     opacity: 0.4;
     margin-top: 60px;
     text-transform: none;
@@ -251,14 +245,60 @@ footer{
 }
 
 /* Floating Particles */
-
-canvas{
+canvas {
     position: fixed;
     inset: 0;
     z-index: -2;
     pointer-events: none;
 }
 
+
+/* =========================================
+   RESPONSIVE DESIGN (MOBILE & TABLETS)
+   ========================================= */
+@media (max-width: 850px) {
+    /* Compress Header */
+    nav { padding: 25px 0; }
+    .logo { padding: 10px 30px; font-size: 0.75rem; }
+
+    /* Fix Section Padding so text doesn't touch sides */
+    section { padding: 0 6%; }
+
+    /* Transform Sidebar to a top horizontal progress bar */
+    .sidebar {
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 100%;
+        flex-direction: row;
+    }
+    .nav-label { display: none; } /* Hide the vertical text on mobile */
+    .nav-line {
+        height: 2px;
+        width: 100%;
+        background: transparent;
+    }
+    .nav-progress {
+        height: 100% !important; 
+        width: 0%; /* We will switch JS to update width instead of height */
+        top: 0;
+        left: 0;
+    }
+
+    /* Fix Timeline Dock to avoid overlapping text on small screens */
+    .timeline-dock {
+        position: relative;
+        bottom: 0;
+        margin-top: 50px;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    /* Make the text reveal distance slightly shorter for mobile */
+    .reveal-text {
+        transform: translateY(30px) scale(0.95);
+    }
+}
 </style>
 </head>
 <body>
@@ -317,7 +357,6 @@ canvas{
 </footer>
 
 <script>
-
 /* Smooth Reveal on Scroll */
 const observerOptions = {
     root: null,
@@ -329,21 +368,30 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if(entry.isIntersecting){
             entry.target.classList.add('active');
-            // Optional: stop observing once revealed so it stays visible
-            // observer.unobserve(entry.target); 
         }
     });
 }, observerOptions);
 
 document.querySelectorAll('.reveal-text').forEach(el => observer.observe(el));
 
-/* Scroll Progress Tracker */
+/* Responsive Scroll Progress Tracker */
 window.addEventListener('scroll', () => {
     const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
-    document.getElementById("progress").style.height = scrolled + "%";
+    
+    // Check window width to decide if we update height (desktop) or width (mobile)
+    if (window.innerWidth > 850) {
+        document.getElementById("progress").style.height = scrolled + "%";
+        document.getElementById("progress").style.width = "100%";
+    } else {
+        document.getElementById("progress").style.width = scrolled + "%";
+        document.getElementById("progress").style.height = "100%";
+    }
 });
+
+/* Trigger scroll event on load to set initial state */
+window.dispatchEvent(new Event('scroll'));
 
 /* Upgraded Floating Particles (60FPS requestAnimationFrame) */
 const canvas = document.getElementById('particles');
@@ -357,7 +405,8 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 let particles = [];
-const particleCount = 80;
+// Reduce particle count slightly on mobile for better performance
+const particleCount = window.innerWidth > 850 ? 80 : 40; 
 
 for(let i = 0; i < particleCount; i++){
     particles.push({
@@ -378,10 +427,8 @@ function animateParticles(){
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
         ctx.fill();
         
-        // Embers float UPWARDS for a more dynamic, energetic feel
         p.y -= p.d; 
         
-        // Reset at the bottom when they float off the top
         if(p.y < 0){
             p.y = canvas.height;
             p.x = Math.random() * canvas.width;
@@ -390,8 +437,6 @@ function animateParticles(){
     
     requestAnimationFrame(animateParticles);
 }
-
-// Start the loop
 animateParticles();
 
 /* Interactive Dock (Visual click effect) */
@@ -402,7 +447,6 @@ dockItems.forEach(item => {
         item.classList.add('active');
     });
 });
-
 </script>
 
 </body>
